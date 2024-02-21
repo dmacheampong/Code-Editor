@@ -1,4 +1,0 @@
-Hello, world!
-This is a text file. You can add text!
-You can write text in it! Or not...
-But always remember to have fun!
