@@ -103,15 +103,15 @@ char *python_extensions[] = { ".py", NULL };
 
 char *c_keywords[] = {
     "switch", "if", "while", "for", "break", "continue", "return", "else",
-    "struct", "union", "typedef", "static", "enum", "class", "case", "#include", "#define"
+    "case", "#include", "#define",
+    "struct|", "union|", "typedef|", "static|", "enum|", "class|",
     "int|", "long|", "double|", "float|", "char|", "unsigned|", "signed|",
     "void|", NULL
 };
 
 char *java_keywords[] = {
-    "switch", "if", "while", "for", "break", "continue", "return", "else",
-    "struct", "union", "typedef", "static", "enum", "class", "case", "import"
-    "int|", "long|", "double|", "float|", "char|", "unsigned|", "signed|",
+    "switch", "if", "while", "for", "break", "continue", "return", "else", "case", "import",
+    "static|", "enum|", "class|", "int|", "long|", "double|", "float|", "char|", "unsigned|", "signed|",
     "void|", NULL
 };
 
