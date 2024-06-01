@@ -121,7 +121,8 @@ char *js_keywords[] = {
 };
 
 char *python_keywords[] = {
-	"def", "elif", "if", "while", "for", NULL
+	"and", "def", "elif", "for", "if", "import", "in",
+    "not", "or", "return", "while", NULL
 };
 
 struct FileSyntax hightlightDatabase[] = { // Highlight database
