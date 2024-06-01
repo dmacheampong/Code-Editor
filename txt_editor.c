@@ -97,12 +97,20 @@ struct Editor editor;
 /*** file types ***/
 
 char *c_extensions[] = { ".c", ".h", ".cpp", NULL };
+char *java_extensions[] = {".java", NULL};
 char *js_extensions[] = { ".js", ".ts", ".jsx", "tsx", NULL };
 char *python_extensions[] = { ".py", NULL };
 
 char *c_keywords[] = {
     "switch", "if", "while", "for", "break", "continue", "return", "else",
-    "struct", "union", "typedef", "static", "enum", "class", "case",
+    "struct", "union", "typedef", "static", "enum", "class", "case", "#include", "#define"
+    "int|", "long|", "double|", "float|", "char|", "unsigned|", "signed|",
+    "void|", NULL
+};
+
+char *java_keywords[] = {
+    "switch", "if", "while", "for", "break", "continue", "return", "else",
+    "struct", "union", "typedef", "static", "enum", "class", "case", "import"
     "int|", "long|", "double|", "float|", "char|", "unsigned|", "signed|",
     "void|", NULL
 };
@@ -124,7 +132,13 @@ struct FileSyntax hightlightDatabase[] = { // Highlight database
         "//", "/*", "*/",
         HL_HIGHLIGHT_NUMBERS | HL_HIGHTLIGHT_STRINGS
     },
-
+    {
+        "java",
+        java_extensions,
+        java_keywords,
+        "//", "/*", "*/",
+        HL_HIGHLIGHT_NUMBERS | HL_HIGHTLIGHT_STRINGS
+    },
     {
         "js",
         js_extensions,
