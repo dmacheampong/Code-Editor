@@ -19,9 +19,9 @@
 
 /*** defines ***/
 
-#define TXT_EDIT_VERSION "0.0.1"
-#define TXT_EDIT_TAB_STOP 4
-#define TXT_EDIT_QUIT_TIMES 3
+#define VERSION "0.0.1"
+#define TAB_STOP 4
+#define QUIT_TIMES 3
 #define CURSOR_X_OFFSET 4
 
 #define CTRL_KEY(k) ((k) & 0x1f) // Defines CTRL key combinations
@@ -461,7 +461,7 @@ int editorRowCxToRx(Row *row, int cursor_x) {
     int i;
     for (i = 0; i < cursor_x; i++) {
         if (row->chars[i] == '\t')
-            rendered_x += (TXT_EDIT_TAB_STOP - 1) - (rendered_x % TXT_EDIT_TAB_STOP);
+            rendered_x += (TAB_STOP - 1) - (rendered_x % TAB_STOP);
         rendered_x++;
     }
     return rendered_x;
@@ -472,7 +472,7 @@ int editorRowRxToCx(Row *row, int rx) {
     int cursor_x;
     for (cursor_x = 0; cursor_x < row->size; cursor_x++) {
         if (row->chars[cursor_x] == '\t')
-            curr_rendered_x += (TXT_EDIT_TAB_STOP - 1) - (curr_rendered_x % TXT_EDIT_TAB_STOP);
+            curr_rendered_x += (TAB_STOP - 1) - (curr_rendered_x % TAB_STOP);
         curr_rendered_x++;
 
         if (curr_rendered_x > rx) return cursor_x;
@@ -487,13 +487,13 @@ void editorUpdateRow(Row *row) {
         if (row->chars[j] == '\t') tabs++; // Gets number of tab chars
 
     free(row->rendered_chars);
-    row->rendered_chars = malloc(row->size + (tabs * (TXT_EDIT_TAB_STOP - 1)) + 1);
+    row->rendered_chars = malloc(row->size + (tabs * (TAB_STOP - 1)) + 1);
 
     int i = 0;
     for (j = 0; j < row->size; j++) {
         if (row->chars[j] == '\t') {
             row->rendered_chars[i++] = ' ';
-            while (i % TXT_EDIT_TAB_STOP != 0) row->rendered_chars[i++] = ' ';
+            while (i % TAB_STOP != 0) row->rendered_chars[i++] = ' ';
         } else {
             row->rendered_chars[i++] = row->chars[j];
         }
@@ -818,7 +818,7 @@ void editorDrawRows(struct AppendBuffer *ab) {
             if (editor.num_rows == 0 && y == editor.screen_rows / 3) { // If file is blank and has no rows
                 char welcome_msg[80];
                 int msg_len = snprintf(welcome_msg, sizeof(welcome_msg),
-                    "TXT Editor -- version %s", TXT_EDIT_VERSION);
+                    "TXT Editor -- version %s", VERSION);
                 if (msg_len > editor.screen_cols) msg_len = editor.screen_cols;
                 int padding = (editor.screen_cols - msg_len) / 2;
                 if (padding) {
@@ -1021,7 +1021,7 @@ void editorMoveCursor(int key) {
 
 //Waits for keypress and handles it
 void editorProcessKeypress(void) {
-    static int quit_times = TXT_EDIT_QUIT_TIMES;
+    static int quit_times = QUIT_TIMES;
 
     int c = editorReadKey();
 
@@ -1096,7 +1096,7 @@ void editorProcessKeypress(void) {
             break;
     }
 
-    quit_times = TXT_EDIT_QUIT_TIMES;
+    quit_times = QUIT_TIMES;
 }
 
 /*** init ***/
